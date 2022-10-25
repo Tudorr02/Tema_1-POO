@@ -1,9 +1,9 @@
-# OOP Template
-
+# TEMA 1 OOP
 ### Tema 0
 
-- [ ] Nume proiect (îl puteți schimba ulterior)
-- [ ] Scurtă descriere a temei alese, ce v-ați propus să implementați
+- [ ] Camin Studentesc
+- [ ] Proiectul contine clasele : Camera, Cladire, Camin, Angajati si are ca scop
+  gestionarea unui camin studentesc.
 
 ## Tema 1
 
