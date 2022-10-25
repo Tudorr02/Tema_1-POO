@@ -48,7 +48,6 @@ public:
     ~Room() {//cout<<"Destructor Room"<<room_number<<"\n";
     }
 
-    Room() = default;
 
 };
 
@@ -99,7 +98,6 @@ public:
     ~Building() {//cout<<"Destructor Building\n";
     }
 
-    Building() = default;
 
 };
 
@@ -141,7 +139,6 @@ public:
     ~Employee() {//cout<<"Destructor Angajat: "<<this->full_name<<"\n";
     }
 
-    Employee() = default;
 
 };
 
@@ -196,8 +193,6 @@ public:
 
     ~Student_Housing() {//cout<<"Destructor Camin Studentesc";
     }
-
-    Student_Housing() = default;
 
 
 };
