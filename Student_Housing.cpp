@@ -40,7 +40,7 @@ ostream &operator<<(ostream &out, const Student_Housing &S) {
     }
 
     out << "-------Employees-------\n";
-    for (const auto &element: S.Employees) {
+    for (const auto *element: S.Employees) {
         out << (*element);
     }
 
