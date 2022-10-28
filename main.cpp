@@ -12,6 +12,7 @@ class Room {
     string room_type;              /// single , double, triple , premium
     string good_for_accommodation;   /// yes, no /// good conditions/ needs repairs
     string free;                     /// yes, no
+    float price;
 
 public:
     Room(int r_number, const string &r_type, const string &r_good, const string &r_free) : room_number{r_number},
@@ -20,11 +21,15 @@ public:
                                                                                                    r_good},
                                                                                            free{r_free} {
 
+        if (this->room_type == "single") this->price = 390;
+        if (this->room_type == "double") this->price = 220 * 2;
+        if (this->room_type == "triple") this->price = 160 * 3;
         //cout<<"Constructor de initializare Room"<<room_number<<"\n";//<<this->room_number<<" "<<this->room_type<<" "<<this->good_for_accommodation<<" "<<this->free<<"\n";
     }
 
     Room(const Room &element) : room_number{element.room_number}, room_type{element.room_type},
-                                good_for_accommodation{element.good_for_accommodation}, free{element.free} {
+                                good_for_accommodation{element.good_for_accommodation}, free{element.free},
+                                price{element.price} {
 
         //cout<<"Constructor de copiere Room"<<element.room_number<<"\n";
     }
@@ -41,13 +46,31 @@ public:
 
     friend ostream &operator<<(std::ostream &out, const Room &room) {
         out << "Room " << room.room_number << " |type: " << room.room_type << " |good_for_accomodation: "
-            << room.good_for_accommodation << " |free: " << room.free << "\n";
+            << room.good_for_accommodation << " |free: " << room.free << "|price: " << room.price << "\n";
         return out;
     }
 
     ~Room() {//cout<<"Destructor Room"<<room_number<<"\n";
     }
 
+    int is_free(const string &type) {
+        if (this->free == "yes" && this->room_type == type)
+            return this->room_number;
+        else
+            return 0;
+    }
+
+    float room_price() {
+        if (this->free == "no") return this->price;
+
+        return 0;
+
+    }
+
+    void update_price(const string &type, float new_price) {
+        if (this->room_type == type)
+            this->price = new_price;
+    }
 
 };
 
@@ -98,6 +121,33 @@ public:
     ~Building() {//cout<<"Destructor Building\n";
     }
 
+    void free_rooms(const string &type) {
+        int count = 0;
+        cout << this->name << ":";
+        for (auto &element: this->rooms) {
+            int x = element.is_free(type);
+            if (x != 0) { cout << " Room  " << x << " is free\n", count++; }
+
+        }
+
+        if (count == 0) cout << " no free rooms\n";
+    }
+
+    float earnings() {
+        float sum = 0;
+        for (auto &element: this->rooms) {
+            sum += element.room_price();
+        }
+        cout << "Building " << this->name << " earnings: " << sum << "\n";
+        return sum;
+    }
+
+    void update_price(const string &type, float new_price) {
+
+        for (auto &element: this->rooms)
+            element.update_price(type, new_price);
+    }
+
 
 };
 
@@ -139,7 +189,14 @@ public:
     ~Employee() {//cout<<"Destructor Angajat: "<<this->full_name<<"\n";
     }
 
+    void salary_raise(const float &addition) {
+        this->salary += addition, cout << "Salary update !! " << this->full_name << "'s salary is now " << this->salary
+                                       << " $\n";
+    }
 
+    float getSalary() const {
+        return salary;
+    }
 };
 
 class Student_Housing {
@@ -147,10 +204,10 @@ class Student_Housing {
     int number_of_buildings;
     int number_of_employees;
     vector<Building> Buildings;
-    vector<Employee> Employees;
+    vector<Employee *> Employees;
 public:
     Student_Housing(int S_number_of_buildings, int S_number_of_employees, vector<Building> &S_Buildings,
-                    vector<Employee> &S_Employees) :
+                    vector<Employee *> &S_Employees) :
             number_of_buildings{S_number_of_buildings}, number_of_employees{S_number_of_employees},
             Buildings{S_Buildings}, Employees{S_Employees} {
 
@@ -185,7 +242,7 @@ public:
 
         out << "-------Employees-------\n";
         for (const auto &element: S.Employees) {
-            out << element;
+            out << (*element);
         }
 
         return out;
@@ -194,50 +251,84 @@ public:
     ~Student_Housing() {//cout<<"Destructor Camin Studentesc";
     }
 
+    void free_rooms(const string &r_type) {
+
+        for (auto &element: this->Buildings) {
+            element.free_rooms(r_type);
+        }
+    }
+
+
+///       $$ PRICES PER PERSON $$
+///       SINGLE room-type : 390 $
+///       DOUBLE room-type : 220 $ -> 440 per room
+///       TRIPLE room-type : 160 $ -> 480 per room
+
+
+    void profit_per_month() {
+        float profit = 0;
+        for (auto &element: this->Buildings) profit += element.earnings();
+        for (auto &element: this->Employees) profit -= element->getSalary();
+
+        cout << "Students Housing's profit per month is: " << profit << "\n";
+    }
+
+    void update_prices(const string &type, float new_price) {
+
+        for (auto &element: this->Buildings)
+            element.update_price(type, new_price);
+
+    }
 
 };
 
 int main() {
 
-    Room R_456(456, "single", "yes", "no");
-    Room R_333(333, "double", "no", "yes");
+    ///M1 rooms
+    Room R_456(456, "single", "yes", "yes");
+    Room R_333(333, "single", "no", "no");
     Room R_111(111, "triple", "no", "no");
-    Room R_121(121, "triple", "yes", "yes");
-    Room R_131(131, "triple", "yes", "no");
+    Room R_121(121, "triple", "yes", "no");
+    Room R_131(131, "triple", "yes", "yes");
+    Room R_366(366, "triple", "yes", "yes");
+
+    ///M2 rooms
     Room R_199(199, "single", "no", "no");
     Room R_205(205, "double", "yes", "yes");
 
-    vector<Room> rooms_M1;
-    vector<Room> rooms_M2;
 
-    rooms_M1.push_back(R_456);
-    rooms_M1.push_back(R_333);
-    rooms_M1.push_back(R_111);
-    rooms_M1.push_back(R_121);
-    rooms_M1.push_back(R_131);
-
-    rooms_M2.push_back(R_199);
-    rooms_M2.push_back(R_205);
+    vector<Room> rooms_M1 = {R_456, R_333, R_111, R_121, R_131, R_366};
+    vector<Room> rooms_M2 = {R_199, R_205};
 
     Building M1(4, 4, true, rooms_M1, "M1");
     Building M2(3, 3, false, rooms_M2, "M2");
 
-    vector<Building> buildings;
-    buildings.push_back(M1);
-    buildings.push_back(M2);
+    vector<Building> buildings = {M1, M2};
 
     ///----EMPLOYEES
-    Employee e1(25, 370, "MARIAN", "gardian");
-    Employee e2(33, 890, "Andrei", "administrator");
+    Employee e1(25, 370, "MARIAN", "guardian");
+    Employee e2(33, 290, "Andrei", "administrator");
 
-    vector<Employee> employees;
+    vector<Employee *> employees = {&e1, &e2};
 
-    employees.push_back(e1);
-    employees.push_back(e2);
+    Student_Housing S1((int) buildings.size(), (int) employees.size(), buildings, employees);
 
-    Student_Housing S1(1, 1, buildings, employees);
+    /// FREE ROOMS CHECKER single/double/triple
+    S1.free_rooms("triple");
+
+    e1.salary_raise(300);
+    e2.salary_raise(100);
+
+    S1.profit_per_month(); /// PROFIT CALCULATOR
+
+    S1.update_prices("triple", 500);
+    S1.update_prices("single", 410);
+
+    cout << "*******************************************************\n";
 
     cout << S1;
+
+    //S1.profit_per_month();
 
 
     return 0;
