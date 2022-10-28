@@ -8,7 +8,8 @@
 ## Tema 1
 
 #### Cerințe
-- [ ] definirea a minim 3-4 clase folosind compunere
+- [ ] definirea a minim 3-4 clase folosind compunere : calculator de profit, afisarea camerelor libere in functie de
+  tip, marirea salariului la angajati, marirea/micsorarea pretului camerelor in functie de tip
 - [ ] constructori de inițializare
 - [ ] pentru o clasă: constructor de copiere, `operator=` de copiere, destructor
 <!-- - [ ] pentru o altă clasă: constructor de mutare, `operator=` de mutare, destructor -->
