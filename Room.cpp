@@ -31,6 +31,7 @@ Room &Room::operator=(const Room &other) {
     room_type = other.room_type;
     good_for_accommodation = other.good_for_accommodation;
     free = other.free;
+    price = other.price;
     return *this;
 }
 
