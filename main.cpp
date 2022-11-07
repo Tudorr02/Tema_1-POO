@@ -35,7 +35,7 @@ int main() {
 
     vector<Employee *> employees = {&e1, &e2};
 
-    Student_Housing S1((int) buildings.size(), (int) employees.size(), buildings, employees);
+    Student_Housing S1(buildings, employees);
 
     /// FREE ROOMS CHECKER single/double/triple
     S1.free_rooms("triple");
