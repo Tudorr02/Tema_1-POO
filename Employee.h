@@ -30,8 +30,6 @@ public:
 
     float getSalary() const;
 
-    void setSalary(const float &new_salary);
-
     string getName() const;
 
 };
