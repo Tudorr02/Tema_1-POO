@@ -32,13 +32,16 @@ ostream &operator<<(ostream &out, const Employee &e) {
 Employee::~Employee() {/*cout<<"Destructor Angajat: "<<this->full_name<<"\n";*/}
 
 
-void Employee::salary_raise(float &addition) {
+void Employee::salary_raise(const float &addition) {
 
     this->salary += addition;
     cout << "Salary update !! " << this->full_name << "'s salary is now " << this->salary << " $\n";
 
 }
 
+void Employee::setSalary(const float &new_salary) {
+    this->salary = new_salary;
+}
 
 
 float Employee::getSalary() const {

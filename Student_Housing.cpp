@@ -55,7 +55,7 @@ void Student_Housing::free_rooms(const string &r_type) {
 float Student_Housing::profit_per_month() {
     float profit = 0;
     for (auto &element: this->Buildings) profit += element.earnings();
-    for (auto &element: this->Employees) profit -= element.getSalary();
+    for (const auto &element: this->Employees) profit -= element.getSalary();
 
     cout << "Students Housing's profit per month is: " << profit << "\n";
     return profit;

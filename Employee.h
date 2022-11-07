@@ -26,9 +26,11 @@ public:
 
     ~Employee();
 
-    void salary_raise(float &addition);
+    void salary_raise(const float &addition);
 
     float getSalary() const;
+
+    void setSalary(const float &new_salary);
 
     string getName() const;
 
