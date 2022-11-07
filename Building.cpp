@@ -18,12 +18,12 @@ Building::Building(const Building &other) :
     //cout<<"Constructor de copiere Building\n";
 }
 
-Building &Building::operator=(const Building &element) {
-    floors = element.floors;
-    kitchens = element.kitchens;
-    has_an_elevator = element.has_an_elevator;
-    rooms = element.rooms;
-    name = element.name;
+Building &Building::operator=(const Building &other) {
+    floors = other.floors;
+    kitchens = other.kitchens;
+    has_an_elevator = other.has_an_elevator;
+    rooms = other.rooms;
+    name = other.name;
     //cout<<"Op de copiere Building\n";
     return *this;
 }

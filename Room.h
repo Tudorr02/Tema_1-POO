@@ -13,9 +13,9 @@ using std::ostream;
 class Room {
 
     int room_number;
-    string room_type;                /// single , double, triple , premium
-    string good_for_accommodation;   /// yes, no /// good conditions/ needs repairs
-    string free;                     /// yes, no
+    string room_type;
+    string good_for_accommodation;
+    string free;
     float price;
 
 public:

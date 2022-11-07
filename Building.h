@@ -7,7 +7,7 @@
 class Building {
     int floors;
     int kitchens;
-    bool has_an_elevator;    /// yes/no
+    bool has_an_elevator;
     vector<Room> rooms;
     string name;
 
@@ -17,7 +17,7 @@ public:
 
     Building(const Building &other);
 
-    Building &operator=(const Building &element);
+    Building &operator=(const Building &other);
 
     friend ostream &operator<<(ostream &out, const Building &B);
 
