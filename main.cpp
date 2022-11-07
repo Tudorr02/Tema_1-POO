@@ -41,8 +41,6 @@ int main() {
     /// FREE ROOMS CHECKER single/double/triple
     S1.free_rooms("triple");
 
-//    e1.salary_raise(300);
-//    e2.salary_raise(100);
 
     S1.profit_per_month(); /// PROFIT CALCULATOR
 
@@ -51,11 +49,11 @@ int main() {
 
     cout << "*******************************************************\n";
 
-    cout << S1;
+    //cout << S1;
 
     //S1.profit_per_month();
 
-    S1.update_salary("MARIAN", 380);
+    S1.update_salary("MARIAN", 370);
     cout << S1;
 
 

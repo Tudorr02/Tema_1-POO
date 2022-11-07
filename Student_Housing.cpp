@@ -71,8 +71,12 @@ void Student_Housing::update_prices(const string &type, float new_price) {
 void Student_Housing::update_salary(const string &full_name, float addition) {
 
     for (auto &element: this->Employees) {
-        if (!full_name.compare(element.getName()))
+
+        if (!(full_name != element.getName())) {
             element.salary_raise(addition);
+
+        }
+
     }
 
 }
