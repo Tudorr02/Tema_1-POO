@@ -39,11 +39,6 @@ void Employee::salary_raise(const float &addition) {
 
 }
 
-void Employee::setSalary(const float &new_salary) {
-    this->salary = new_salary;
-}
-
-
 float Employee::getSalary() const {
     return salary;
 }
