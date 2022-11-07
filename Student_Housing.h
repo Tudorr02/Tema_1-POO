@@ -8,10 +8,10 @@
 class Student_Housing {
 
     vector<Building> Buildings;
-    vector<Employee *> Employees;
+    vector<Employee> Employees;
 public:
     Student_Housing(vector<Building> &S_Buildings,
-                    vector<Employee *> &S_Employees);
+                    vector<Employee> &S_Employees);
 
     Student_Housing(const Student_Housing &other);
 
@@ -26,6 +26,8 @@ public:
     float profit_per_month();
 
     void update_prices(const string &type, float new_price);
+
+    void update_salary(const string &full_name, float addition);
 };
 
 #endif //OOP_STUDENT_HOUSING_H

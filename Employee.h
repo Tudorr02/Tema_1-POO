@@ -29,6 +29,8 @@ public:
     void salary_raise(const float &addition);
 
     float getSalary() const;
+
+    string getName() const;
 };
 
 

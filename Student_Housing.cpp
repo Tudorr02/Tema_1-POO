@@ -3,7 +3,7 @@
 
 
 Student_Housing::Student_Housing(vector<Building> &S_Buildings,
-                                 vector<Employee *> &S_Employees) :
+                                 vector<Employee> &S_Employees) :
         Buildings{S_Buildings}, Employees{S_Employees} {
 
     // cout<<"Constructor de initializare Camin Studentesc\n";
@@ -34,8 +34,8 @@ ostream &operator<<(ostream &out, const Student_Housing &S) {
     }
 
     out << "-------Employees-------\n";
-    for (const auto *element: S.Employees) {
-        out << (*element);
+    for (const auto &element: S.Employees) {
+        out << (element);
     }
 
     return out;
@@ -55,7 +55,7 @@ void Student_Housing::free_rooms(const string &r_type) {
 float Student_Housing::profit_per_month() {
     float profit = 0;
     for (auto &element: this->Buildings) profit += element.earnings();
-    for (auto &element: this->Employees) profit -= element->getSalary();
+    for (auto &element: this->Employees) profit -= element.getSalary();
 
     cout << "Students Housing's profit per month is: " << profit << "\n";
     return profit;
@@ -65,6 +65,15 @@ void Student_Housing::update_prices(const string &type, float new_price) {
 
     for (auto &element: this->Buildings)
         element.update_price(type, new_price);
+
+}
+
+void Student_Housing::update_salary(const string &full_name, float addition) {
+
+    for (auto &element: this->Employees) {
+        if (!full_name.compare(element.getName()))
+            element.salary_raise(addition);
+    }
 
 }
 

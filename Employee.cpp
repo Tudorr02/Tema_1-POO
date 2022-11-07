@@ -41,3 +41,7 @@ float Employee::getSalary() const {
     return salary;
 }
 
+string Employee::getName() const {
+    return full_name;
+}
+

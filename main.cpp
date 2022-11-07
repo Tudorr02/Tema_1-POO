@@ -9,6 +9,7 @@
 int main() {
 
     ///M1 rooms
+
     Room R_456(456, "single", "yes", "yes");
     Room R_333(333, "single", "no", "no");
     Room R_111(111, "triple", "no", "no");
@@ -33,15 +34,15 @@ int main() {
     Employee e1(25, 370, "MARIAN", "guardian");
     Employee e2(33, 290, "Andrei", "administrator");
 
-    vector<Employee *> employees = {&e1, &e2};
+    vector<Employee> employees = {e1, e2};
 
     Student_Housing S1(buildings, employees);
 
     /// FREE ROOMS CHECKER single/double/triple
     S1.free_rooms("triple");
 
-    e1.salary_raise(300);
-    e2.salary_raise(100);
+//    e1.salary_raise(300);
+//    e2.salary_raise(100);
 
     S1.profit_per_month(); /// PROFIT CALCULATOR
 
@@ -53,6 +54,9 @@ int main() {
     cout << S1;
 
     //S1.profit_per_month();
+
+    S1.update_salary("MARIAN", 380);
+    cout << S1;
 
 
     return 0;
